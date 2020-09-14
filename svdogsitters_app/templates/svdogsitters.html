@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Silicon Valley local dog sitting">
+    <title>SV Dog Sitters</title>
+    {% load static %}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container bg-light">
+        <nav class="navbar navbar-expand-md navbar-light bg-info">
+            <h1 class="navbar-brand text-white">SV Dog Sitters</h1>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                <ul class="navbar-nav text-right">
+                    <li class="nav-item active">
+                        <a class="nav-link text-white" href="/">Home</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-white" href="#" id="loginDropdownMenu" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Login
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <form action='/svdogsitters/login' class="dropdown-item form-group" method="POST">
+                                {% csrf_token %}
+                                <input class="form-row mb-2" type="email" name="email" placeholder="Email">
+                                <input class="form-row mb-2" type="password" name="password" placeholder="Password">
+                                <input class="btn btn-info" type="submit" name="submit" value="Login">
+                            </form>
+                        </div>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link text-white" href="/svdogsitters/registration">Register</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        {% if messages %}
+        <div class="row justify-content-center">
+            <ul class="list-unstyled">
+                {% for message in messages %}
+                <li class='text-danger'>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+
+        <div class="row mt-4">
+            <img src="{% static 'images/art_svdogsitters.jpg' %}"  alt="Art of Dog Sitters" class="col-xl-3 col-lg-4 col-md-5 col-6 rounded-circle mx-auto">
+        </div>
+        <div class="row">
+            <p class="mx-auto col-8"> Hello! <br><br> We are SV Dog Sitters. We are a small family with Brenda, Ernesto and Koga our dog. We have been dog sitting / dog walking with app based services as a side hustle since 2017. It is work that we enjoy. We love making the dogs a part of our family and spoiling them with play time, treats and walks. Even after dogs leave us we reminisce the times we have had with them. Each and every dog is special to us.</p>
+        </div>
+
+        <h1 class="text-center">Services</h1>
+
+        <div class="container">
+            <div class="mb-4 col-8 mx-auto">
+                <div class="card h-100 bg-info">
+                    <div class="card-body">
+                        <h4 class="card-title text-center  text-white">Doggy Day Care</h4>
+                        <h6 class="text-center text-white">In our home from 7am - 10pm</h6>
+                        <div class="card-text row">
+                            <p class="col text-left text-white">Per Day</p>
+                            <p class="col text-right text-white">$30</p>
+                        </div>
+                        <div class="card-text row">
+                            <p class="col text-left text-white">Doggy Taxi</p>
+                            <p class="col text-right text-white">+$10</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-4 col-8 mx-auto">
+                <div class="card h-100 bg-info">
+                    <div class="card-body">
+                        <h4 class="card-title text-center text-white">Doggy Walk</h4>
+                        <h6 class="text-center text-white">In your area from 9am - 7pm</h6>
+                        <div class="card-text row">
+                            <p class="col text-left text-white">30 Minute Walk</p>
+                            <p class="col text-right text-white">$20</p>
+                        </div>
+                        <div class="card-text row">
+                            <p class="col text-left text-white">60 Minute Walk</p>
+                            <p class="col text-right text-white">$30</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-4 col-8 mx-auto">
+                <div class="card h-100 bg-info">
+                    <div class="card-body">
+                        <h4 class="card-title text-center text-white">Doggy Boarding</h4>
+                        <h6 class="text-center text-white">In our home from 7am - 10pm</h6>
+                        <div class="card-text row">
+                            <p class="col text-left text-white">Per Night</p>
+                            <p class="col text-right text-white">$35</p>
+                        </div>
+                        <div class="card-text row">
+                            <p class="col text-left text-white">Doggy Taxi</p>
+                            <p class="col text-right text-white">+$10</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h1 class="text-center">How to get started </h1>
+        <div class="col-8 mb-4 mx-auto">
+        
+            <h4 class="row">Step 1</h4>
+            <p>Register a new account</p>
+
+            <h4 class="row">Step 2</h4>
+            <p>Register your pet</p>
+
+            <h4 class="row">Step 3</h4>
+            <p>Review calendly for open time and request desired service</p>
+
+            <h4 class="row">Step 4</h4>
+            <p>Once we receive the request we will reach out to you</p>
+        
+        </div>
+
+        <div class="container text-center" id="calendar" style="display: show;">
+            <h1 class="text-center">Our Calendar</h1>
+            <iframe src="https://calendar.google.com/calendar/embed?height=400&amp;wkst=1&amp;bgcolor=%234285F4&amp;ctz=America%2FLos_Angeles&amp;src=YnNtYXJ0aW5lejkzQGdtYWlsLmNvbQ&amp;src=YWRkcmVzc2Jvb2sjY29udGFjdHNAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&amp;src=ZW4udXNhI2hvbGlkYXlAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&amp;color=%23039BE5&amp;color=%2333B679&amp;color=%230B8043&amp;showTitle=0&amp;showPrint=0&amp;showCalendars=0" style="border:solid 1px #777;min-width:400px;min-height:400px;display:inline;" min-width="400" min-height="400" frameborder="0" class="col-8 p-0"></iframe>
+        </div>
+
+        <h1 class="text-center">Our Clients</h1>
+        <div id="carouselIndicators" class="carousel slide mb-4 mx-auto col-lg-6 col-md-6" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-target="#carouselIndicators" data-slide-to="0" class="active"></li>
+                <li data-target="#carouselIndicators" data-slide-to="1"></li>
+                <li data-target="#carouselIndicators" data-slide-to="2"></li>
+                <li data-target="#carouselIndicators" data-slide-to="3"></li>
+            </ol>
+            <div class="carousel-inner" role="listbox">
+                <div class="carousel-item active">
+                    <img class="d-block img-fluid rounded-circle" src="{% static 'images/isma.PNG' %}" alt="First slide">
+                </div>
+                <div class="carousel-item">
+                    <img class="d-block img-fluid rounded-circle" src="{% static 'images/mochi.PNG' %}" alt="Second slide">
+                </div>
+                <div class="carousel-item">
+                    <img class="d-block img-fluid rounded-circle" src="{% static 'images/kuma.PNG' %}" alt="Third slide">
+                </div>
+                <div class="carousel-item">
+                    <img class="d-block img-fluid rounded-circle" src="{% static 'images/pepper_run.jpg' %}" alt="Fourth slide">
+                </div>
+            </div>
+            <a class="carousel-control-prev" href="#carouselIndicators" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselIndicators" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    
+        <footer class="py-2 bg-info">
+            <div class="container">
+                <p class="m-0 text-center text-white">Copyright &copy; SV Dog Sitters 2020</p>
+                <ul class="list-group list-group-horizontal mt-2 px-4">
+                    <li class="list-group-item bg-info flex-fill text-center">
+                        <a target="_blank" class="text-white" href="https://www.instagram.com/svdogsitters/ ">Instagram</a>
+                    </li>
+                    <li class="list-group-item bg-info flex-fill text-center">
+                        <a target="_blank" class="text-white" href="https://calendly.com/svdogsitters">Calendly</a>
+                    </li>
+                    <li class="list-group-item bg-info flex-fill text-center">
+                        <a target="_blank" class="text-white" href="https://paypal.me/brendasmartinez?locale.x=en_US">Paypal</a>
+                    </li>
+                </ul>
+            </div>
+
+        </footer>
+    </div>
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+</body>
+</html>

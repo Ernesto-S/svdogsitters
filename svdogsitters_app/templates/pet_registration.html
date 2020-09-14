@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Silicon Valley at home local dog sitting">
+    <title>SV Dog Sitters</title>
+    {% load static %}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container bg-light">
+        <nav class="navbar navbar-expand-md navbar-light bg-info">
+            <h1 class="navbar-brand text-white">SV Dog Sitters</h1>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </nav>
+
+        <div class="container">
+            <div class="row mt-4">
+                <img src="{% static 'images/kowga.jpg' %}"  alt="kowga" class="col-xl-3 col-lg-4 col-md-5 col-6 rounded-circle mx-auto">
+            </div>
+            <div class="row">
+                <p class="mx-auto col-8"> Ruuuf! <br> <br>I have a feeling I am going to like you human. Ok, let's fill out your dog registration form. <br><br> Please help your dog fill out this form.</p>
+            </div>
+        </div>
+
+        <div class="container">
+            <form action="/svdogsitters/pet_register" method="post" class=" justify-content-center col-lg-5 col-md-7 col-sm-9 col-10 mx-auto">
+                {% csrf_token %}
+                <h1 class="text-center mb-3">Doggy Registration Form</h1>
+                <div class="form-group">
+                    <h5>Dog Details</h5>
+                    <div class="input-group mb-2">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text bg-info text-white" id="inputGroupPrepend">Name</span>
+                        </div>
+                        <input name="dog_name" type="text" class="form-control" aria-describedby="inputGroupPrepend" required>
+                    </div>
+                    <div class="input-group mb-2">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text bg-info text-white" id="inputGroupPrepend">Birthday</span>
+                        </div>
+                        <input name="dog_birthday" type="date" class="form-control" aria-describedby="inputGroupPrepend" required>
+                    </div>
+    
+                    <div class="input-group mb-2">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text bg-info text-white" id="inputGroupPrepend">Breed</span>
+                        </div>
+                        <input name="dog_breed" type="text" class="form-control" aria-describedby="inputGroupPrepend" required>
+                    </div>
+                    <div class="input-group mb-2">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text bg-info text-white" id="inputGroupPrepend">Weight</span>
+                        </div>
+                        <input name="dog_weight" type="text" class="form-control" aria-describedby="inputGroupPrepend" required>
+                    </div>
+    
+                    <h5>Veterinarian Details</h5>
+                    <div class="input-group mb-2">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text bg-info text-white" id="inputGroupPrepend">Clinic</span>
+                        </div>
+                        <input name="vet_clinic" type="text" class="form-control" aria-describedby="inputGroupPrepend" required>
+                    </div>
+                    <div class="input-group mb-2">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text bg-info text-white" id="inputGroupPrepend">Address</span>
+                        </div>
+                        <input name="vet_address" type="text" class="form-control" aria-describedby="inputGroupPrepend" required>
+                    </div>
+    
+                    <div class="input-group mb-2">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text bg-info text-white" id="inputGroupPrepend">Phone</span>
+                        </div>
+                        <input name="vet_phone" type="text" class="form-control" aria-describedby="inputGroupPrepend" required>
+                    </div>
+    
+                    <h5>Optional Details</h5>
+                    <div class="input-group mb-2">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text bg-info text-white" id="inputGroupPrepend">Allergies</span>
+                        </div>
+                        <textarea name="dog_allergies" class="form-control" aria-describedby="inputGroupPrepend"></textarea>
+                    </div>
+                    <div class="input-group mb-2">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text bg-info text-white" id="inputGroupPrepend">Comments</span>
+                        </div>
+                        <textarea name="dog_comments" class="form-control" aria-describedby="inputGroupPrepend"></textarea>
+                    </div>
+    
+                    <div class="form-group row justify-content-center">
+                        <button type="submit" class="btn btn-info btn-block col-4">Register</button>
+                    </div>  
+                </div>
+            </form>
+
+            {% if messages %}
+            <div class="row justify-content-center">
+                <ul class="list-unstyled">
+                    {% for message in messages %}
+                    <li class='text-danger'>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+        </div>
+        
+    
+        <footer class="py-2 bg-info">
+            <div class="container">
+                <p class="m-0 text-center text-white">Copyright &copy; SV Dog Sitters 2020</p>
+                <ul class="list-group list-group-horizontal mt-2 px-4">
+                    <li class="list-group-item bg-info flex-fill text-center">
+                        <a target="_blank" class="text-white" href="https://www.instagram.com/svdogsitters/ ">Instagram</a>
+                    </li>
+                    <li class="list-group-item bg-info flex-fill text-center">
+                        <a target="_blank" class="text-white" href="https://calendly.com/svdogsitters">Calendly</a>
+                    </li>
+                    <li class="list-group-item bg-info flex-fill text-center">
+                        <a target="_blank" class="text-white" href="https://paypal.me/brendasmartinez?locale.x=en_US">Paypal</a>
+                    </li>
+                </ul>
+            </div>
+        </footer>
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+</body>
+</html>

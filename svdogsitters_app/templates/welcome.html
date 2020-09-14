@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Silicon Valley at home local dog sitting">
+    <title>SV Dog Sitters</title>
+    {% load static %}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container bg-light" id="wrapper">
+        <nav class="navbar navbar-expand-md navbar-light bg-info">
+            <h1 class="navbar-brand text-white">SV Dog Sitters</h1>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse " id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link text-white" href="/svdogsitters/logout">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <div class="container">
+            <h1 class="mt-4 text-center">Welcome {{human.first_name}}!</h1>
+            <div class="row">
+                <p class="mx-auto col-8 text-center">Please request a service we can help you with.</p>
+            </div>
+        </div>
+
+        <div class="container">
+            <form action="/svdogsitters/request" method="post" class="form-group col-8 mx-auto">
+                {% csrf_token %}
+                <h4 class="text-center">Estimate Service</h4>
+                <select class="custom-select form-control" id="service" name="service">
+                    <option selected>Select Service</option>
+                    <option value="doggy-boarding-drop-off 35" id="boarding">Doggy Boarding $35</option>
+                    <option value="doggy-day-care-drop-off 30">Doggy Day Care $30</option>
+                    <option value="30min-doggy-walk 20">30min Doggy Walk $20</option>
+                    <option value="60min-doggy-walk 30">60min Doggy Walk $30</option>
+                </select>
+                <div class="input-group my-2" id="nights" style="display: none;">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text bg-info text-white" id="inputGroupPrepend">Nights</span>
+                    </div>
+                    <input name="nights" type="number" min="1" value="1" class="form-control" aria-describedby="inputGroupPrepend">
+                </div>
+
+                <div class="form-group row justify-content-center my-2">
+                    <button type="submit" class="btn btn-info btn-block col-4" id="request">Request</button>
+                </div> 
+            </form>
+            <div class="row">
+                <h5 class="col-8 mx-auto text-center" >Estimate: $<span id="estimate">{{estimate}}</span></h5>
+            </div>
+            <div class="row">
+                <p class="mx-auto col-8 text-center">*If we can provide the service we will send an invoices to your email.</p>
+            </div>
+        </div>
+        
+        <div class="container text-center" id="calendar" style="display: show;">
+            <h1 class="text-center">Our Calendar</h1>
+            <iframe src="https://calendar.google.com/calendar/embed?height=400&amp;wkst=1&amp;bgcolor=%234285F4&amp;ctz=America%2FLos_Angeles&amp;src=YnNtYXJ0aW5lejkzQGdtYWlsLmNvbQ&amp;src=YWRkcmVzc2Jvb2sjY29udGFjdHNAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&amp;src=ZW4udXNhI2hvbGlkYXlAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&amp;color=%23039BE5&amp;color=%2333B679&amp;color=%230B8043&amp;showTitle=0&amp;showPrint=0&amp;showCalendars=0" style="border:solid 1px #777;min-width:400px;min-height:400px;display:inline;" min-width="400" min-height="400" frameborder="0" class="col-8 p-0"></iframe>
+        </div>
+
+        <div class="container" id="calendly" style="display: none;">
+            {% if 'off' in service_name %}
+
+                <h4 class="col-8 mx-auto text-center my-4">Please use Calendly to schedule a drop off time</h4>
+                <!-- Calendly inline widget begin -->
+                <div class="calendly-inline-widget" data-url="https://calendly.com/svdogsitters/{{service_name}}" style="min-width:320px;height:980px;" id="scheduler"></div>
+                <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js"></script>
+                <!-- Calendly inline widget end -->
+
+                <h4 class="col-8 mx-auto text-center my-4">Please use Calendly to schedule a pick up time</h4>
+                <!-- Calendly inline widget begin -->
+                <div class="calendly-inline-widget" data-url="https://calendly.com/svdogsitters/doggy-pick-up" style="min-width:320px;height:980px;"></div>
+                <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js"></script>
+                <!-- Calendly inline widget end -->
+
+            {% else %}
+
+                <h4 class="col-8 mx-auto text-center my-4">Please use Calendly below to schedule a walk</h4>
+                <!-- Calendly inline widget begin -->
+                <div class="calendly-inline-widget" data-url="https://calendly.com/svdogsitters/{{service_name}}" style="min-width:320px;height:980px;" id="scheduler"></div>
+                <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js"></script>
+                <!-- Calendly inline widget end -->
+
+            {% endif %}
+
+            <h4 class="col-8 mx-auto text-center mb-4">Thank you for supporting our small business!</h4>
+        </div>
+
+        <footer class="py-2 bg-info">
+            <div class="container">
+                <p class="m-0 text-center text-white">Copyright &copy; SV Dog Sitters 2020</p>
+                <ul class="list-group list-group-horizontal mt-2 px-4">
+                    <li class="list-group-item bg-info flex-fill text-center">
+                        <a target="_blank" class="text-white" href="https://www.instagram.com/svdogsitters/ ">Instagram</a>
+                    </li>
+                    <li class="list-group-item bg-info flex-fill text-center">
+                        <a target="_blank" class="text-white" href="https://calendly.com/svdogsitters">Calendly</a>
+                    </li>
+                    <li class="list-group-item bg-info flex-fill text-center">
+                        <a target="_blank" class="text-white" href="https://paypal.me/brendasmartinez?locale.x=en_US">Paypal</a>
+                    </li>
+                </ul>
+            </div>
+
+        </footer>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+</body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $('form').submit(function(r){
+            r.preventDefault();
+            $.ajax({
+                url: '/svdogsitters/request',
+                method: 'POST',
+                data: $(this).serialize(),
+                success: function(serverResponse){
+                    console.log(serverResponse);
+                    $('#wrapper').html(serverResponse);
+                    $('#calendly').show();
+                    $('#calendar').hide();
+                }
+            })
+
+        })
+
+        $('#service').change(function(){
+            if (this.value == 'doggy-boarding-drop-off 35')
+                $('#nights').show();
+            else
+                $('#nights').hide();
+        });
+    </script>
+</html>
